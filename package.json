@@ -61,12 +61,12 @@
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "stylelint",
+      "stylelint --fix",
       "prettier --write",
       "git add"
     ],
     "*.{ts,tsx}": [
-      "stylelint",
+      "stylelint --fix",
       "prettier --write",
       "git add"
     ],
@@ -75,7 +75,7 @@
       "git add"
     ],
     "*.css": [
-      "stylelint",
+      "stylelint --fix",
       "prettier --write",
       "git add"
     ]
@@ -138,9 +138,6 @@
     }
   },
   "stylelint": {
-    "processors": [
-      "stylelint-processor-styled-components"
-    ],
     "extends": [
       "stylelint-config-standard",
       "stylelint-config-styled-components"
