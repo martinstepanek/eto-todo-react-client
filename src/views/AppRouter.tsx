@@ -6,9 +6,12 @@ import ErrorBoundary from './ErrorBoundary';
 // Error page is downloaded without lazy loading intentionally
 import PageDown from './page-down/PageDown';
 import PrivateRoute from './PrivateRoute';
+// @ts-ignore
+import { PageTransition } from '@steveeeie/react-page-transition';
+import PageSkeleton from '../components/PageSkeleton';
 
 const Home = React.lazy(() => import('./home/Home'));
-const SignIn = React.lazy(() => import('./sign-in/SignIn'));
+const SignInWrapper = React.lazy(() => import('./sign-in/SignInWrapper'));
 const NotFound = React.lazy(() => import('./not-found/NotFound'));
 
 interface RouteRule {
@@ -16,7 +19,6 @@ interface RouteRule {
   protected: boolean;
   exact?: boolean;
   main: () => React.ReactElement;
-  theme?: {};
 }
 
 const routes: RouteRule[] = [
@@ -30,7 +32,7 @@ const routes: RouteRule[] = [
     path: '/sign-in',
     protected: false,
     exact: true,
-    main: () => <SignIn />,
+    main: () => <SignInWrapper />,
   },
   {
     path: '*',
@@ -53,25 +55,38 @@ const AppRouter: FC = () => {
         }
       >
         <Router>
-          <React.Suspense fallback={<div>Loading...</div>}>
-            <Switch>
-              {routes.map((route: RouteRule) => {
-                const RouteComponent = route.protected ? PrivateRoute : Route;
+          <React.Suspense fallback={<PageSkeleton />}>
+            <Route
+              render={({ location }) => {
                 return (
-                  <RouteComponent
-                    key={route.path}
-                    path={route.path}
-                    exact={route.exact}
-                    children={
-                      <ThemeProvider theme={route.theme || {}} key={route.path}>
-                        <GlobalStyle />
-                        <route.main />
-                      </ThemeProvider>
-                    }
-                  />
+                  <PageTransition
+                    preset="moveToLeftFromRight"
+                    transitionKey={location.pathname}
+                  >
+                    <Switch>
+                      {routes.map((route: RouteRule) => {
+                        const RouteComponent = route.protected
+                          ? PrivateRoute
+                          : Route;
+                        return (
+                          <RouteComponent
+                            key={route.path}
+                            path={route.path}
+                            exact={route.exact}
+                            children={
+                              <ThemeProvider theme={{}} key={route.path}>
+                                <GlobalStyle />
+                                <route.main />
+                              </ThemeProvider>
+                            }
+                          />
+                        );
+                      })}
+                    </Switch>
+                  </PageTransition>
                 );
-              })}
-            </Switch>
+              }}
+            />
           </React.Suspense>
         </Router>
       </ErrorBoundary>
