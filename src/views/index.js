@@ -1,10 +1,30 @@
 import * as React from 'react';
 import AppRouter from './AppRouter';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
 import config from '../config';
+import { setContext } from '@apollo/client/link/context';
+
+const httpLink = createHttpLink({
+  uri: config.graphQLUri,
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('token');
+  return {
+    headers: {
+      ...headers,
+      'Access-Token': token ? token : '',
+    },
+  };
+});
 
 const client = new ApolloClient({
-  uri: config.graphQLUri,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 

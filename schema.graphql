@@ -1,0 +1,91 @@
+directive @specifiedBy(url: String!) on SCALAR
+scalar DateTime
+
+enum DateType {
+  Date
+  Week
+  Month
+}
+
+type Mutation {
+  login(user: UserInput!): User!
+  createTask(task: TaskInput!): Task!
+  editTask(task: TaskInput!, taskId: String!): Task
+  markTaskAsDone(taskEntry: TaskEntryInput!): Task
+  markTaskAsNotDone(taskEntry: TaskEntryInput!): Task
+  delayTask(taskEntryDelay: TaskEntryDelayInput!): Task
+  deleteTask(taskEntryDelay: TaskEntryDeleteInput!): Task
+}
+
+type Query {
+  me: User!
+  user(userId: String!): User
+  getTasks(listType: TaskListType!): [Task!]!
+}
+
+type Task {
+  taskId: ID!
+  user: User!
+  name: String!
+  detail: String
+  specificDateType: DateType!
+  specificDateValue: DateTime
+  specificTimeValue: Float
+  isRecurrent: Boolean!
+  recurrentDateValue: Int
+  isDone: Boolean!
+  isDelayed: Boolean!
+  isDeleted: Boolean!
+}
+
+input TaskEntryDelayInput {
+  taskId: String!
+  when: DateTime!
+  specificDateType: DateType!
+  specificDateValue: DateTime!
+  specificTimeValue: Int
+}
+
+input TaskEntryDeleteInput {
+  taskId: String!
+  when: DateTime!
+  allRecurringTasks: Boolean!
+}
+
+input TaskEntryInput {
+  taskId: String!
+  when: DateTime!
+}
+
+input TaskInput {
+  name: String!
+  detail: String
+  specificDateType: DateType!
+  specificDateValue: DateTime
+  specificTimeValue: Int
+  isRecurrent: Boolean = false
+  recurrentDateValue: Int
+}
+
+enum TaskListType {
+  Today
+  Tomorrow
+  ThisWeek
+  NextWeek
+  ThisMonth
+  NextMonth
+}
+
+type User {
+  userId: ID!
+  name: String!
+  email: String!
+  picture: String!
+  accessToken: String!
+  tasks: [Task!]!
+}
+
+input UserInput {
+  tokenId: String!
+}
+
