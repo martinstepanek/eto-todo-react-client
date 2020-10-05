@@ -10,7 +10,7 @@ import PrivateRoute from './PrivateRoute';
 import { PageTransition } from '@steveeeie/react-page-transition';
 import PageSkeleton from '../components/PageSkeleton';
 
-const Home = React.lazy(() => import('./home/Home'));
+const HomeWrapper = React.lazy(() => import('./home/HomeWrapper'));
 const SignInWrapper = React.lazy(() => import('./sign-in/SignInWrapper'));
 const NotFound = React.lazy(() => import('./not-found/NotFound'));
 
@@ -26,7 +26,7 @@ const routes: RouteRule[] = [
     path: '/',
     exact: true,
     protected: true,
-    main: () => <Home />,
+    main: () => <HomeWrapper />,
   },
   {
     path: '/sign-in',
