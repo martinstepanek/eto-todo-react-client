@@ -7,7 +7,7 @@ import {
 import config from '../../../config';
 import { useMutation } from '@apollo/client';
 import LOGIN from '../login';
-import { RippleButton } from '../../../components/base/buttons/RippleButton';
+import { RippleButton } from '../../../components/base/form/buttons/RippleButton';
 import GoogleLoginButtonSkeleton from './GoogleLoginButtonSkeleton';
 
 interface GoogleLoginButtonProps {
