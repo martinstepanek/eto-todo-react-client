@@ -1,5 +1,6 @@
 import React, {
   forwardRef,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -64,7 +65,9 @@ const TaskForm = forwardRef<FormHandle, TaskFormProps>(
     return (
       <Formik initialValues={initialValues} onSubmit={onFormSubmit}>
         {formikProps => {
-          onNameFieldChange(formikProps.values.name);
+          useEffect(() => onNameFieldChange(formikProps.values.name), [
+            formikProps.values.name,
+          ]);
           return (
             <Form {...props}>
               <Field name="name">

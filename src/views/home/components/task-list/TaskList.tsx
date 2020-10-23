@@ -10,7 +10,7 @@ const TaskList: FC<TaskListProps> = ({ tasks }) => {
   return (
     <>
       {tasks.map(task => (
-        <TaskItem task={task} />
+        <TaskItem task={task} key={task.taskId} />
       ))}
     </>
   );
