@@ -4,7 +4,11 @@ import TASK_CONTENT from '../taskContent';
 const CREATE_TASK = gql`
   mutation CreateTask($task: TaskInput!) {
     createTask(task: $task) {
-      ...TaskContent
+      operationType
+      task {
+        ...TaskContent
+      }
+      inLists
     }
   }
   ${TASK_CONTENT}

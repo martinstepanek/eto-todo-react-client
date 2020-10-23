@@ -9,7 +9,7 @@ enum DateType {
 
 type Mutation {
   login(user: UserInput!): User!
-  createTask(task: TaskInput!): Task!
+  createTask(task: TaskInput!): TaskOperation!
   editTask(task: TaskInput!, taskId: String!): Task
   markTaskAsDone(taskEntry: TaskEntryInput!): Task
   markTaskAsNotDone(taskEntry: TaskEntryInput!): Task
@@ -74,6 +74,18 @@ enum TaskListType {
   NextWeek
   ThisMonth
   NextMonth
+}
+
+type TaskOperation {
+  operationType: TaskOperationType!
+  task: Task!
+  inLists: [TaskListType!]!
+}
+
+enum TaskOperationType {
+  Create
+  Update
+  Delete
 }
 
 type User {
