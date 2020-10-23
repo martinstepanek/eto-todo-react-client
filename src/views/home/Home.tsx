@@ -35,7 +35,7 @@ const Home: FC = props => {
         scrollTopAtClose={true}
         onChange={onFormVisibilityChange}
       >
-        <CreateTaskForm ref={formRef} />
+        <CreateTaskForm ref={formRef} onSubmit={() => setIsFormOpen(false)} />
       </SwipeableBottomSheet>
     </div>
   );

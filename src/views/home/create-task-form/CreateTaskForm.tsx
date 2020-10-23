@@ -4,26 +4,37 @@ import { DateType } from '../task-form/DateType';
 import CREATE_TASK from '../task-form/createTask';
 import { useMutation } from '@apollo/client';
 
-const CreateTaskForm = forwardRef<FormHandle>((props, ref) => {
-  const initialValues: TaskFormValues = {
-    name: '',
-    detail: '',
-    specificDateType: DateType.Date,
-    specificDateValue: new Date(),
-    specificTimeValue: 0,
-    isRecurrent: false,
-    recurrentDateValue: 0,
-  };
+interface CreateTaskFormProps {
+  onSubmit: () => void;
+}
 
-  const [createTask, { data }] = useMutation(CREATE_TASK);
+const CreateTaskForm = forwardRef<FormHandle, CreateTaskFormProps>(
+  ({ onSubmit }, ref) => {
+    const initialValues: TaskFormValues = {
+      name: '',
+      detail: '',
+      specificDateType: DateType.Date,
+      specificDateValue: new Date(),
+      specificTimeValue: 0,
+      isRecurrent: false,
+      recurrentDateValue: 0,
+    };
 
-  const onSubmit = async (values: TaskFormValues) => {
-    await createTask({ variables: { task: values } });
-  };
+    const [createTask, { data }] = useMutation(CREATE_TASK);
 
-  return (
-    <TaskForm ref={ref} initialValues={initialValues} onSubmit={onSubmit} />
-  );
-});
+    const onTaskFormSubmit = async (values: TaskFormValues) => {
+      onSubmit();
+      await createTask({ variables: { task: values } });
+    };
+
+    return (
+      <TaskForm
+        ref={ref}
+        initialValues={initialValues}
+        onSubmit={onTaskFormSubmit}
+      />
+    );
+  }
+);
 
 export default CreateTaskForm;

@@ -48,6 +48,11 @@ const TaskForm = forwardRef<FormHandle, TaskFormProps>(
     const [isDetailVisible, setIsDetailVisible] = useState(false);
     const [isSaveButtonDisabled, setIsSaveButtonDisabled] = useState(true);
 
+    const onFormSubmit = (values: TaskFormValues, { resetForm }) => {
+      onSubmit(values);
+      resetForm(initialValues);
+    };
+
     const onNameFieldChange = value => {
       if (value.length > 0) {
         setIsSaveButtonDisabled(false);
@@ -57,7 +62,7 @@ const TaskForm = forwardRef<FormHandle, TaskFormProps>(
     };
 
     return (
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik initialValues={initialValues} onSubmit={onFormSubmit}>
         {formikProps => {
           onNameFieldChange(formikProps.values.name);
           return (
