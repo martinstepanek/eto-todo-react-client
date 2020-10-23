@@ -6,9 +6,9 @@ import React, {
 } from 'react';
 import styled from 'styled-components';
 import { Field, Form, Formik } from 'formik';
-import { DateType } from '../types/DateType';
-import { Input } from '../../../components/base/form/Input';
-import colors from '../../../styles/colors';
+import { DateType } from '../../types/DateType';
+import { Input } from '../../../../components/base/form/Input';
+import colors from '../../../../styles/colors';
 import TaskFormOptionsMenu from './TaskFormOptionsMenu';
 
 export interface TaskFormValues {

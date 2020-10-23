@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { Button } from '../../../components/base/form/buttons/Button';
-import colors from '../../../styles/colors';
+import { Button } from '../../../../components/base/form/buttons/Button';
+import colors from '../../../../styles/colors';
 
 const SaveButton: FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = props => {
   return <Button {...props}>Save</Button>;

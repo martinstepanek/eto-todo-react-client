@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import TASK_CONTENT from '../taskContent';
+import TASK_CONTENT from './taskContent';
 
 const CREATE_TASK = gql`
   mutation CreateTask($task: TaskInput!) {

@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import TASK_CONTENT from '../taskContent';
+import TASK_CONTENT from './taskContent';
 
 const GET_TASKS = gql`
   query GetTasks($listType: TaskListType!) {

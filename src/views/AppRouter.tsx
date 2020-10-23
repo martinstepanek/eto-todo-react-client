@@ -10,7 +10,7 @@ import PrivateRoute from './PrivateRoute';
 import { PageTransition } from '@steveeeie/react-page-transition';
 import PageSkeleton from '../components/PageSkeleton';
 
-const HomeWrapper = React.lazy(() => import('./home/HomeWrapper'));
+const HomeWrapper = React.lazy(() => import('./home/components/HomeWrapper'));
 const SignInWrapper = React.lazy(() => import('./sign-in/SignInWrapper'));
 const NotFound = React.lazy(() => import('./not-found/NotFound'));
 

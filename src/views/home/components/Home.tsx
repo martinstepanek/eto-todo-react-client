@@ -1,10 +1,10 @@
 import React, { FC, useRef, useState } from 'react';
-import { TaskListType } from './types/TaskListType';
+import { TaskListType } from '../types/TaskListType';
 import TaskListPage from './task-list/TaskListPage';
 import styled from 'styled-components';
-import PlusButton from '../../components/base/form/buttons/PlusButton';
+import PlusButton from '../../../components/base/form/buttons/PlusButton';
 import SwipeableBottomSheet from 'react-swipeable-bottom-sheet';
-import colors from '../../styles/colors';
+import colors from '../../../styles/colors';
 import CreateTaskForm from './create-task-form/CreateTaskForm';
 import { FormHandle } from './task-form/TaskForm';
 

@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
 import TaskForm, { FormHandle, TaskFormValues } from '../task-form/TaskForm';
-import { DateType } from '../types/DateType';
-import CREATE_TASK from './createTask';
+import { DateType } from '../../types/DateType';
+import CREATE_TASK from '../../operations/createTask';
 import { useMutation } from '@apollo/client';
-import { TaskListType } from '../types/TaskListType';
-import GET_TASKS from '../task-list/getTasks';
-import { TaskOperation } from '../types/TaskOperation';
+import { TaskListType } from '../../types/TaskListType';
+import GET_TASKS from '../../operations/getTasks';
+import { TaskOperation } from '../../types/TaskOperation';
 
 interface CreateTaskFormProps {
   onSubmit: () => void;

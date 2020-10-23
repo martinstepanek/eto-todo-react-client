@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
 import { faAlignJustify } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
-import colors from '../../../styles/colors';
+import colors from '../../../../styles/colors';
 import SaveButton from './SaveButton';
 
 interface TaskFormOptionsMenuProps {
