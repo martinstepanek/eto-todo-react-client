@@ -1,5 +1,5 @@
 import React, { FC, useRef, useState } from 'react';
-import { TaskListType } from './task-list/TaskListType';
+import { TaskListType } from './types/TaskListType';
 import TaskListPage from './task-list/TaskListPage';
 import styled from 'styled-components';
 import PlusButton from '../../components/base/form/buttons/PlusButton';

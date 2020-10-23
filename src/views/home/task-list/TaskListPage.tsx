@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useQuery } from '@apollo/client';
 import GET_TASKS from './getTasks';
-import { TaskListType } from './TaskListType';
+import { TaskListType } from '../types/TaskListType';
 import GET_TODO_TASKS from './getTodoTasks';
 import TaskList from './TaskList';
 import taskListTypeReadable from './taskListTypeReadable';

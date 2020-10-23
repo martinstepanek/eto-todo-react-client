@@ -1,4 +1,4 @@
-import { TaskListType } from './TaskListType';
+import { TaskListType } from '../types/TaskListType';
 
 export default {
   [TaskListType.Todo]: 'Todo',
