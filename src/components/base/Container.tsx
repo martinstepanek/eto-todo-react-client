@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { breakpoints } from '../../styles/breakpoints';
 
 const Container = styled.div`
-  width: 270px;
+  width: 290px;
   margin: auto;
 
   ${breakpoints.md} {
