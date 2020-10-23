@@ -3,13 +3,13 @@ import TASK_CONTENT from '../taskContent';
 
 const GET_TODO_TASKS = gql`
   query GetTodoTasks {
-    today: getTasks(listType: Today) {
+    today: tasks(listType: Today) {
       ...TaskContent
     }
-    thisWeek: getTasks(listType: ThisWeek) {
+    thisWeek: tasks(listType: ThisWeek) {
       ...TaskContent
     }
-    thisMonth: getTasks(listType: ThisMonth) {
+    thisMonth: tasks(listType: ThisMonth) {
       ...TaskContent
     }
   }

@@ -3,7 +3,7 @@ import TASK_CONTENT from '../taskContent';
 
 const GET_TASKS = gql`
   query GetTasks($listType: TaskListType!) {
-    getTasks(listType: $listType) {
+    tasks(listType: $listType) {
       ...TaskContent
     }
   }
