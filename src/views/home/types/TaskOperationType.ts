@@ -1,5 +1,5 @@
 export enum TaskOperationType {
-  Create,
-  Update,
-  Delete,
+  Create = 'Create',
+  Update = 'Update',
+  Delete = 'Delete',
 }

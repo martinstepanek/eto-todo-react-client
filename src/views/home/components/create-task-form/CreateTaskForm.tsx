@@ -3,9 +3,7 @@ import TaskForm, { FormHandle, TaskFormValues } from '../task-form/TaskForm';
 import { DateType } from '../../types/DateType';
 import CREATE_TASK from '../../operations/createTask';
 import { useMutation } from '@apollo/client';
-import { TaskListType } from '../../types/TaskListType';
-import GET_TASKS from '../../operations/getTasks';
-import { TaskOperation } from '../../types/TaskOperation';
+import { taskLocalOperation } from '../../operations/taskLocalOperation';
 
 interface CreateTaskFormProps {
   onSubmit: () => void;
@@ -25,23 +23,7 @@ const CreateTaskForm = forwardRef<FormHandle, CreateTaskFormProps>(
 
     const [createTask] = useMutation(CREATE_TASK, {
       update(cache, { data: { createTask } }) {
-        const query = GET_TASKS;
-        const taskOperation = createTask as TaskOperation;
-
-        taskOperation.inLists.map((listType: TaskListType) => {
-          const data: any = cache.readQuery({
-            query,
-            variables: { listType },
-          });
-
-          cache.writeQuery({
-            query,
-            variables: { listType },
-            data: {
-              tasks: [...data.tasks, taskOperation.task],
-            },
-          });
-        });
+        taskLocalOperation(cache, createTask);
       },
     });
 
