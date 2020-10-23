@@ -11,7 +11,7 @@ import { Input } from '../../../components/base/form/Input';
 import colors from '../../../styles/colors';
 import TaskFormOptionsMenu from './TaskFormOptionsMenu';
 
-interface TaskFormValues {
+export interface TaskFormValues {
   name: string;
   detail: string;
   specificDateType: DateType;
@@ -21,73 +21,75 @@ interface TaskFormValues {
   recurrentDateValue: number;
 }
 
-const TaskForm = forwardRef((props, ref) => {
-  const initialValues: TaskFormValues = {
-    name: '',
-    detail: '',
-    specificDateType: DateType.Date,
-    specificDateValue: new Date(),
-    specificTimeValue: 0,
-    isRecurrent: false,
-    recurrentDateValue: 0,
-  };
+export interface FormHandle {
+  open: () => void;
+  close: () => void;
+}
 
-  const nameFieldRef = useRef<HTMLInputElement>(null);
+interface TaskFormProps {
+  onSubmit: (values: TaskFormValues) => void;
+  initialValues: TaskFormValues;
+}
 
-  useImperativeHandle(ref, () => ({
-    open: () => {
-      if (nameFieldRef && nameFieldRef.current) {
-        // hack to deffer focus because of animation
-        setTimeout(() => nameFieldRef?.current?.focus(), 100);
+const TaskForm = forwardRef<FormHandle, TaskFormProps>(
+  ({ onSubmit, initialValues, ...props }, ref) => {
+    const nameFieldRef = useRef<HTMLInputElement>(null);
+
+    useImperativeHandle(ref, () => ({
+      open: () => {
+        if (nameFieldRef && nameFieldRef.current) {
+          // hack to deffer focus because of animation
+          setTimeout(() => nameFieldRef?.current?.focus(), 100);
+        }
+      },
+      close: () => {},
+    }));
+
+    const [isDetailVisible, setIsDetailVisible] = useState(false);
+    const [isSaveButtonDisabled, setIsSaveButtonDisabled] = useState(true);
+
+    const onNameFieldChange = value => {
+      if (value.length > 0) {
+        setIsSaveButtonDisabled(false);
+      } else {
+        setIsSaveButtonDisabled(true);
       }
-    },
-    close: () => {},
-  }));
+    };
 
-  const [isDetailVisible, setIsDetailVisible] = useState(false);
-  const [isSaveButtonDisabled, setIsSaveButtonDisabled] = useState(true);
-  const [nameFieldValue, setNameFieldValue] = useState(initialValues.name);
-
-  const onSubmit = async (values: TaskFormValues) => {};
-
-  const onNameFieldChange = e => {
-    const value = e.target.value;
-    setNameFieldValue(value);
-    if (value.length > 0) {
-      setIsSaveButtonDisabled(false);
-    } else {
-      setIsSaveButtonDisabled(true);
-    }
-  };
-
-  return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
-      <Form {...props}>
-        <Field name="name">
-          {({ field }) => (
-            <Input
-              {...field}
-              type="text"
-              placeholder="New task"
-              onChange={onNameFieldChange}
-              value={nameFieldValue}
-              ref={nameFieldRef}
-              autoComplete="off"
-            />
-          )}
-        </Field>
-        {isDetailVisible && <Field name="detail" type="text" as="textarea" />}
-        <TaskFormOptionsMenu
-          onDetailClick={() => setIsDetailVisible(true)}
-          onCalendarClick={() => {}}
-          saveButtonProps={{
-            disabled: isSaveButtonDisabled,
-          }}
-        />
-      </Form>
-    </Formik>
-  );
-});
+    return (
+      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        {formikProps => {
+          onNameFieldChange(formikProps.values.name);
+          return (
+            <Form {...props}>
+              <Field name="name">
+                {({ field }) => (
+                  <Input
+                    {...field}
+                    type="text"
+                    placeholder="New task"
+                    ref={nameFieldRef}
+                    autoComplete="off"
+                  />
+                )}
+              </Field>
+              {isDetailVisible && (
+                <Field name="detail" type="text" as="textarea" />
+              )}
+              <TaskFormOptionsMenu
+                onDetailClick={() => setIsDetailVisible(true)}
+                onCalendarClick={() => {}}
+                saveButtonProps={{
+                  disabled: isSaveButtonDisabled,
+                }}
+              />
+            </Form>
+          );
+        }}
+      </Formik>
+    );
+  }
+);
 
 export default styled(TaskForm)`
   background-color: ${colors.textBackground} !important;

@@ -4,8 +4,8 @@ import TaskListPage from './task-list/TaskListPage';
 import styled from 'styled-components';
 import PlusButton from '../../components/base/form/buttons/PlusButton';
 import SwipeableBottomSheet from 'react-swipeable-bottom-sheet';
-import TaskForm from './task-form/TaskForm';
 import colors from '../../styles/colors';
+import CreateTaskForm from './create-task-form/CreateTaskForm';
 
 const Home: FC = props => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -34,7 +34,7 @@ const Home: FC = props => {
         scrollTopAtClose={true}
         onChange={onFormVisibilityChange}
       >
-        <TaskForm ref={formRef} />
+        <CreateTaskForm ref={formRef} />
       </SwipeableBottomSheet>
     </div>
   );
