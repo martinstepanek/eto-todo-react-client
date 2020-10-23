@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import TaskForm, { FormHandle, TaskFormValues } from '../task-form/TaskForm';
 import { DateType } from '../task-form/DateType';
-import CREATE_TASK from '../task-form/createTask';
+import CREATE_TASK from './createTask';
 import { useMutation } from '@apollo/client';
 
 interface CreateTaskFormProps {

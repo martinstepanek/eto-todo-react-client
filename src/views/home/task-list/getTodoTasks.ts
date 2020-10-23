@@ -1,29 +1,19 @@
 import { gql } from '@apollo/client';
+import TASK_CONTENT from '../taskContent';
 
 const GET_TODO_TASKS = gql`
   query GetTodoTasks {
     today: getTasks(listType: Today) {
-      name
-      detail
-      isDone
-      isDelayed
-      isDeleted
+      ...TaskContent
     }
     thisWeek: getTasks(listType: ThisWeek) {
-      name
-      detail
-      isDone
-      isDelayed
-      isDeleted
+      ...TaskContent
     }
     thisMonth: getTasks(listType: ThisMonth) {
-      name
-      detail
-      isDone
-      isDelayed
-      isDeleted
+      ...TaskContent
     }
   }
+  ${TASK_CONTENT}
 `;
 
 export default GET_TODO_TASKS;
