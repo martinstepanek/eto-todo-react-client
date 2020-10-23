@@ -6,11 +6,12 @@ import PlusButton from '../../components/base/form/buttons/PlusButton';
 import SwipeableBottomSheet from 'react-swipeable-bottom-sheet';
 import colors from '../../styles/colors';
 import CreateTaskForm from './create-task-form/CreateTaskForm';
+import { FormHandle } from './task-form/TaskForm';
 
 const Home: FC = props => {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const formRef = useRef<any>(null);
+  const formRef = useRef<FormHandle>(null);
 
   const onFormVisibilityChange = value => {
     setIsFormOpen(value);

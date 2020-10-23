@@ -20,7 +20,6 @@ const CreateTaskForm = forwardRef<FormHandle>((props, ref) => {
   const onSubmit = async (values: TaskFormValues) => {
     await createTask({ variables: { task: values } });
   };
-  console.log(data);
 
   return (
     <TaskForm ref={ref} initialValues={initialValues} onSubmit={onSubmit} />
