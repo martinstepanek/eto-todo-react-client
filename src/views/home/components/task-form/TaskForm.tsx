@@ -45,7 +45,13 @@ const TaskForm = forwardRef<FormHandle, TaskFormProps>(
           setTimeout(() => nameFieldRef?.current?.focus(), 100);
         }
       },
-      close: () => {},
+      close: () => {
+        if (detailFieldRef && detailFieldRef.current) {
+          if (detailFieldRef.current.value.length === 0) {
+            setIsDetailVisible(false);
+          }
+        }
+      },
     }));
 
     const [isDetailVisible, setIsDetailVisible] = useState(false);
@@ -54,6 +60,7 @@ const TaskForm = forwardRef<FormHandle, TaskFormProps>(
     const onFormSubmit = (values: TaskFormValues, { resetForm }) => {
       onSubmit(values);
       resetForm(initialValues);
+      setIsDetailVisible(false);
     };
 
     const onNameFieldChange = value => {

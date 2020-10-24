@@ -15,9 +15,11 @@ const Home: FC = props => {
 
   const onFormVisibilityChange = value => {
     setIsFormOpen(value);
-    if (value) {
-      if (formRef && formRef.current) {
-        formRef.current?.open();
+    if (formRef && formRef.current) {
+      if (value) {
+        formRef.current.open();
+      } else {
+        formRef.current.close();
       }
     }
   };
