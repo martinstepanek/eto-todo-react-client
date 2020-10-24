@@ -54,9 +54,13 @@ export default styled(Home)`
     right: 20px;
   }
 
+  .react-swipeable-view-container > div:last-of-type {
+    display: none;
+  }
+
   .react-swipeable-view-container,
-  .react-swipeable-view-container > div,
-  .react-swipeable-view-container > div > div {
+  .react-swipeable-view-container > div:first-of-type,
+  .react-swipeable-view-container > div:first-of-type > div {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: ${colors.background} !important;
