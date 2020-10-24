@@ -11,6 +11,7 @@ import { DateType } from '../../types/DateType';
 import { Input } from '../../../../components/base/form/Input';
 import colors from '../../../../styles/colors';
 import TaskFormOptionsMenu from './TaskFormOptionsMenu';
+import { DetailTextArea } from './DetailTextArea';
 
 export interface TaskFormValues {
   name: string;
@@ -35,6 +36,7 @@ interface TaskFormProps {
 const TaskForm = forwardRef<FormHandle, TaskFormProps>(
   ({ onSubmit, initialValues, ...props }, ref) => {
     const nameFieldRef = useRef<HTMLInputElement>(null);
+    const detailFieldRef = useRef<HTMLTextAreaElement>(null);
 
     useImperativeHandle(ref, () => ({
       open: () => {
@@ -62,6 +64,13 @@ const TaskForm = forwardRef<FormHandle, TaskFormProps>(
       }
     };
 
+    const showDetailInput = () => {
+      setIsDetailVisible(true);
+      if (detailFieldRef && detailFieldRef.current) {
+        detailFieldRef.current.focus();
+      }
+    };
+
     return (
       <Formik initialValues={initialValues} onSubmit={onFormSubmit}>
         {formikProps => {
@@ -81,11 +90,18 @@ const TaskForm = forwardRef<FormHandle, TaskFormProps>(
                   />
                 )}
               </Field>
-              {isDetailVisible && (
-                <Field name="detail" type="text" as="textarea" />
-              )}
+              <Field name="detail">
+                {({ field }) => (
+                  <DetailTextArea
+                    {...field}
+                    placeholder="Add details"
+                    visible={isDetailVisible}
+                    ref={detailFieldRef}
+                  />
+                )}
+              </Field>
               <TaskFormOptionsMenu
-                onDetailClick={() => setIsDetailVisible(true)}
+                onDetailClick={showDetailInput}
                 onCalendarClick={() => {}}
                 saveButtonProps={{
                   disabled: isSaveButtonDisabled,
