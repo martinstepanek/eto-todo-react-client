@@ -7,12 +7,11 @@ import SwipeableBottomSheet from 'react-swipeable-bottom-sheet';
 import colors from '../../../styles/colors';
 import CreateTaskForm from './create-task-form/CreateTaskForm';
 import { FormHandle } from './task-form/TaskForm';
+import ListPicker from './task-list/ListPicker';
 
 const Home: FC = props => {
   const [isFormOpen, setIsFormOpen] = useState(false);
-
   const formRef = useRef<FormHandle>(null);
-
   const onFormVisibilityChange = value => {
     setIsFormOpen(value);
     if (formRef && formRef.current) {
@@ -28,10 +27,30 @@ const Home: FC = props => {
     onFormVisibilityChange(true);
   };
 
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
+  const [listType, setListType] = useState(TaskListType.Todo);
+  const onPickListType = (listType: TaskListType) => {
+    setListType(listType);
+    setIsPickerOpen(false);
+  };
+
   return (
     <div {...props}>
-      <TaskListPage listType={TaskListType.Todo} />
+      <TaskListPage listType={listType} />
       <PlusButton className="plus-button" onClick={onPlusButtonClick} />
+      <SwipeableBottomSheet
+        open={isPickerOpen}
+        scrollTopAtClose={true}
+        onChange={value => setIsPickerOpen(value)}
+        overflowHeight={64}
+        shadowTip={false}
+      >
+        <ListPicker
+          value={listType}
+          onChange={onPickListType}
+          isOpen={isPickerOpen}
+        />
+      </SwipeableBottomSheet>
       <SwipeableBottomSheet
         open={isFormOpen}
         scrollTopAtClose={true}
@@ -42,7 +61,6 @@ const Home: FC = props => {
     </div>
   );
 };
-
 export default styled(Home)`
   position: relative;
   overflow: auto;
