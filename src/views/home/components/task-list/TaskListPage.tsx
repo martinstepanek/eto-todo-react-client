@@ -26,11 +26,11 @@ const TaskListPage: FC<TaskListPageProps> = ({ listType }) => {
     return (
       <>
         <ListHeading>Today</ListHeading>
-        <TaskList tasks={data.today} />
+        <TaskList tasks={data.today} listType={listType} />
         <ListHeadingSeparator>This Week</ListHeadingSeparator>
-        <TaskList tasks={data.thisWeek} />
+        <TaskList tasks={data.thisWeek} listType={listType} />
         <ListHeadingSeparator>This Month</ListHeadingSeparator>
-        <TaskList tasks={data.thisMonth} />
+        <TaskList tasks={data.thisMonth} listType={listType} />
       </>
     );
   }
@@ -38,7 +38,7 @@ const TaskListPage: FC<TaskListPageProps> = ({ listType }) => {
   return (
     <>
       <ListHeading>{taskListTypeReadable[listType]}</ListHeading>
-      <TaskList tasks={data.tasks} />
+      <TaskList tasks={data.tasks} listType={listType} />
     </>
   );
 };

@@ -5,6 +5,7 @@ const TASK_CONTENT = gql`
     taskId
     name
     detail
+    isRecurrent
     isDone
     isDelayed
     isDeleted

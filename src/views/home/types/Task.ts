@@ -5,4 +5,5 @@ export interface Task {
   isDone: boolean;
   isDelayed: boolean;
   isDeleted: boolean;
+  isRecurrent: boolean;
 }

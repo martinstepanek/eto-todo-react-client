@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { Task } from '../../types/Task';
-import styled from 'styled-components';
 import CheckBoxOption from '../../../../components/base/form/CheckBoxOption';
 import { useMutation } from '@apollo/client';
 import { taskLocalOperation } from '../../operations/taskLocalOperation';
@@ -41,17 +40,14 @@ const TaskItem: FC<TaskItemProps> = ({ task, ...props }) => {
   };
 
   return (
-    <div {...props}>
-      <CheckBoxOption
-        id={checkBoxId}
-        label={task.name}
-        isChecked={task.isDone}
-        onChange={onCheckBoxChange}
-      />
-    </div>
+    <CheckBoxOption
+      id={checkBoxId}
+      label={task.name}
+      isChecked={task.isDone}
+      onChange={onCheckBoxChange}
+      {...props}
+    />
   );
 };
 
-export default styled(TaskItem)`
-  padding: 15px;
-`;
+export default TaskItem;

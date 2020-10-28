@@ -110,7 +110,7 @@ export default styled(CheckBoxOption)`
       left: 0;
       height: 1px;
       width: 100%;
-      background: #b9b8c3;
+      background: ${colors.mutedText};
       transform-origin: 0 0;
       transform: scaleX(0);
     }
@@ -137,7 +137,7 @@ export default styled(CheckBoxOption)`
       }
 
       .option-label {
-        color: #b9b8c3;
+        color: ${colors.mutedText};
         transition: all 0.15s ease;
 
         &::after {

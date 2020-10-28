@@ -1,16 +1,18 @@
 import React, { FC } from 'react';
 import { Task } from '../../types/Task';
-import TaskItem from './TaskItem';
+import TaskItemWithDetail from './TaskItemWithDetail';
+import { TaskListType } from '../../types/TaskListType';
 
 interface TaskListProps {
   tasks: Task[];
+  listType: TaskListType;
 }
 
-const TaskList: FC<TaskListProps> = ({ tasks }) => {
+const TaskList: FC<TaskListProps> = ({ tasks, listType }) => {
   return (
     <>
       {tasks.map(task => (
-        <TaskItem task={task} key={task.taskId} />
+        <TaskItemWithDetail task={task} key={task.taskId + listType} />
       ))}
     </>
   );
