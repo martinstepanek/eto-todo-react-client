@@ -12,7 +12,7 @@ interface TaskListPageProps {
 
 const TaskListPage: FC<TaskListPageProps> = ({ listType }) => {
   const query = listType === TaskListType.Todo ? GET_TODO_TASKS : GET_TASKS;
-  const { loading, error, data } = useQuery(query, {
+  const { loading, data } = useQuery(query, {
     variables: { listType },
   });
 

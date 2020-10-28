@@ -31,7 +31,6 @@ const routes: RouteRule[] = [
   {
     path: '/sign-in',
     protected: false,
-    exact: true,
     main: () => <SignInWrapper />,
   },
   {

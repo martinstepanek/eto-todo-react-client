@@ -22,6 +22,7 @@ const addTask = (cache: ApolloCache<unknown>, taskOperation: TaskOperation) => {
         tasks: [...data.tasks, taskOperation.task],
       },
     });
+    return true;
   });
 };
 
