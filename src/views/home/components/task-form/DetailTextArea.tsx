@@ -2,14 +2,14 @@ import styled from 'styled-components';
 import { TextArea } from '../../../../components/base/form/TextArea';
 
 export interface DetailTextAreaProps {
-  visible: boolean;
+  isVisible: boolean;
 }
 
 const DetailTextArea = styled(TextArea)<DetailTextAreaProps>`
   transition: 0.3s ease;
 
-  ${({ visible }) =>
-    visible
+  ${({ isVisible }) =>
+    isVisible
       ? `
        height: 100px;
        padding: 10px 15px;

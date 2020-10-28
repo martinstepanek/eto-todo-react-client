@@ -102,7 +102,7 @@ const TaskForm = forwardRef<FormHandle, TaskFormProps>(
                   <DetailTextArea
                     {...field}
                     placeholder="Add details"
-                    visible={isDetailVisible}
+                    isVisible={isDetailVisible}
                     ref={detailFieldRef}
                   />
                 )}
