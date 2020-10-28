@@ -106,7 +106,7 @@ export default styled(CheckBoxOption)`
     &::after {
       content: '';
       position: absolute;
-      top: 8px;
+      top: 50%;
       left: 0;
       height: 1px;
       width: 100%;

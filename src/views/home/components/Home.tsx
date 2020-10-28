@@ -36,30 +36,34 @@ const Home: FC = props => {
 
   return (
     <div {...props}>
-      <TaskListPage listType={listType} />
+      <div className="task-list">
+        <TaskListPage listType={listType} />
+      </div>
       <PlusButton className="plus-button" onClick={onPlusButtonClick} />
-      <SwipeableBottomSheet
-        open={isPickerOpen}
-        scrollTopAtClose={true}
-        onChange={value => setIsPickerOpen(value)}
-        overflowHeight={64}
-        shadowTip={false}
-        swipeableViewsProps={{ slideClassName: 'swipeable-view' }}
-      >
-        <ListPicker
-          value={listType}
-          onChange={onPickListType}
-          isOpen={isPickerOpen}
-        />
-      </SwipeableBottomSheet>
-      <SwipeableBottomSheet
-        open={isFormOpen}
-        scrollTopAtClose={true}
-        onChange={onFormVisibilityChange}
-        swipeableViewsProps={{ slideClassName: 'swipeable-view' }}
-      >
-        <CreateTaskForm ref={formRef} onSubmit={() => setIsFormOpen(false)} />
-      </SwipeableBottomSheet>
+      <div className="bottom-sheets">
+        <SwipeableBottomSheet
+          open={isPickerOpen}
+          scrollTopAtClose={true}
+          onChange={value => setIsPickerOpen(value)}
+          overflowHeight={64}
+          shadowTip={false}
+          swipeableViewsProps={{ slideClassName: 'swipeable-view' }}
+        >
+          <ListPicker
+            value={listType}
+            onChange={onPickListType}
+            isOpen={isPickerOpen}
+          />
+        </SwipeableBottomSheet>
+        <SwipeableBottomSheet
+          open={isFormOpen}
+          scrollTopAtClose={true}
+          onChange={onFormVisibilityChange}
+          swipeableViewsProps={{ slideClassName: 'swipeable-view' }}
+        >
+          <CreateTaskForm ref={formRef} onSubmit={() => setIsFormOpen(false)} />
+        </SwipeableBottomSheet>
+      </div>
     </div>
   );
 };
@@ -68,8 +72,13 @@ export default styled(Home)`
   overflow: auto;
   height: 100%;
 
+  .task-list {
+    overflow-y: auto;
+    height: calc(100vh - 64px); /* 64px is height of bottom sheets */
+  }
+
   .plus-button {
-    position: absolute;
+    position: fixed;
     bottom: 100px;
     right: 20px;
   }
@@ -79,5 +88,10 @@ export default styled(Home)`
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: ${colors.background} !important;
+  }
+
+  .bottom-sheets {
+    z-index: 5;
+    position: relative;
   }
 `;
