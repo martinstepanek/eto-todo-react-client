@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
-import { faAlignJustify } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import colors from '../../../../styles/colors';
 import SaveButton from './SaveButton';
+import { IconAlignJustify } from '../../../../components/icons/IconAlignJustify';
+import { IconCalendarCheck } from '../../../../components/icons/IconCalendarCheck';
 
 interface TaskFormOptionsMenuProps {
   onDetailClick: () => void;
@@ -21,16 +20,8 @@ const TaskFormOptionsMenu: FC<TaskFormOptionsMenuProps> = ({
   return (
     <div {...props}>
       <div>
-        <FontAwesomeIcon
-          icon={faAlignJustify}
-          onClick={onDetailClick}
-          className="icon"
-        />
-        <FontAwesomeIcon
-          icon={faCalendarCheck}
-          onClick={onCalendarClick}
-          className="icon"
-        />
+        <IconAlignJustify className="icon" onClick={onDetailClick} />
+        <IconCalendarCheck className="icon" onClick={onCalendarClick} />
       </div>
       <SaveButton {...saveButtonProps} />
     </div>
