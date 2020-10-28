@@ -29,14 +29,16 @@ const CheckBoxOption: FC<CheckBoxOptionProps> = ({
         checked={isChecked}
         onChange={onCheckBoxChange}
       />
-      <label className="option" htmlFor={id}>
-        <span className="option-checkbox">
-          <svg width="12px" height="9px" viewBox="0 0 12 9">
-            <polyline points="1 5 4 8 11 1" />
-          </svg>
-        </span>
+      <div className="option">
+        <label htmlFor={id}>
+          <span className="option-checkbox">
+            <svg width="12px" height="9px" viewBox="0 0 12 9">
+              <polyline points="1 5 4 8 11 1" />
+            </svg>
+          </span>
+        </label>
         <span className="option-label">{label}</span>
-      </label>
+      </div>
     </div>
   );
 };
@@ -50,7 +52,7 @@ export default styled(CheckBoxOption)`
     transform: scale(1);
     vertical-align: middle;
     border: 1px solid #b9b8c3;
-    transition: all 0.2s ease;
+    transition: all 0.1s ease;
 
     svg {
       position: absolute;
@@ -64,8 +66,8 @@ export default styled(CheckBoxOption)`
       stroke-linejoin: round;
       stroke-dasharray: 16px;
       stroke-dashoffset: 16px;
-      transition: all 0.3s ease;
-      transition-delay: 0.1s;
+      transition: all 0.15s ease;
+      transition-delay: 0.05s;
       transform: translate3d(0, 0, 0);
 
       &::before {
@@ -77,7 +79,7 @@ export default styled(CheckBoxOption)`
         transform: scale(0);
         opacity: 1;
         border-radius: 50%;
-        transition-delay: 0.2s;
+        transition-delay: 0.1s;
       }
     }
   }
@@ -99,7 +101,7 @@ export default styled(CheckBoxOption)`
   }
 
   .option-label {
-    margin-left: 8px;
+    margin-left: 15px;
 
     &::after {
       content: '';
@@ -121,7 +123,7 @@ export default styled(CheckBoxOption)`
       .option-checkbox {
         border-color: ${colors.primary};
         background: ${colors.primary};
-        animation: check 0.6s ease;
+        animation: check 0.3s ease;
 
         svg {
           stroke-dashoffset: 0;
@@ -130,17 +132,17 @@ export default styled(CheckBoxOption)`
         &::before {
           transform: scale(2.2);
           opacity: 0;
-          transition: all 0.6s ease;
+          transition: all 0.3s ease;
         }
       }
 
       .option-label {
         color: #b9b8c3;
-        transition: all 0.3s ease;
+        transition: all 0.15s ease;
 
         &::after {
           transform: scaleX(1);
-          transition: all 0.3s ease;
+          transition: all 0.15s ease;
         }
       }
     }

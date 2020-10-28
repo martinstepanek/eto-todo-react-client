@@ -53,5 +53,5 @@ const TaskItem: FC<TaskItemProps> = ({ task, ...props }) => {
 };
 
 export default styled(TaskItem)`
-+
+  padding: 15px;
 `;

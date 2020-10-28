@@ -5,6 +5,8 @@ import { TaskListType } from '../../types/TaskListType';
 import GET_TODO_TASKS from '../../operations/getTodoTasks';
 import TaskList from './TaskList';
 import taskListTypeReadable from './taskListTypeReadable';
+import { ListHeading } from './ListHeading';
+import ListHeadingSeparator from './ListHeadingSeparator';
 
 interface TaskListPageProps {
   listType: TaskListType;
@@ -23,11 +25,11 @@ const TaskListPage: FC<TaskListPageProps> = ({ listType }) => {
   if (listType === TaskListType.Todo) {
     return (
       <>
-        <h2>Today</h2>
+        <ListHeading>Today</ListHeading>
         <TaskList tasks={data.today} />
-        <h2>This Week</h2>
+        <ListHeadingSeparator>This Week</ListHeadingSeparator>
         <TaskList tasks={data.thisWeek} />
-        <h2>This Month</h2>
+        <ListHeadingSeparator>This Month</ListHeadingSeparator>
         <TaskList tasks={data.thisMonth} />
       </>
     );
@@ -35,7 +37,7 @@ const TaskListPage: FC<TaskListPageProps> = ({ listType }) => {
 
   return (
     <>
-      <h2>{taskListTypeReadable[listType]}</h2>
+      <ListHeading>{taskListTypeReadable[listType]}</ListHeading>
       <TaskList tasks={data.tasks} />
     </>
   );
