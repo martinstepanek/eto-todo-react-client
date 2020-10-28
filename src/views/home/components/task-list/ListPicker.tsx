@@ -8,6 +8,7 @@ import {
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import ListPickerArrowIcon from './ListPickerArrowIcon';
+import SwipeableViews from 'react-swipeable-views';
 
 interface ListPickerProps {
   value: TaskListType;
@@ -39,6 +40,10 @@ const ListPicker: FC<ListPickerProps> = ({
     }
   };
 
+  const onSwipe = index => {
+    onChange(keys[index]);
+  };
+
   return (
     <div {...props}>
       <div className="header">
@@ -48,7 +53,17 @@ const ListPicker: FC<ListPickerProps> = ({
           onClick={changeOptionToLeft}
           className={isOpen ? 'arrow-left arrow-left-hidden' : 'arrow-left'}
         />
-        {taskListTypeReadable[value]}
+        <SwipeableViews
+          onChangeIndex={onSwipe}
+          index={keys.findIndex(key => key === value)}
+          disabled={isOpen}
+          className="swipeable-options"
+          slideClassName="swipeable-option"
+        >
+          {keys.map(key => (
+            <div key={key}>{taskListTypeReadable[key]}</div>
+          ))}
+        </SwipeableViews>
         <ListPickerArrowIcon
           icon={faChevronRight}
           disabled={isSelectedLastOption}
@@ -80,6 +95,17 @@ export default styled(ListPicker)`
     font-size: 1.2em;
     height: 64px;
     padding: 15px;
+  }
+
+  .swipeable-options {
+    width: 70%;
+  }
+
+  .swipeable-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${colors.textBackground} !important;
   }
 
   .arrow-left,

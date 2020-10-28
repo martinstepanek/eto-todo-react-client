@@ -44,6 +44,7 @@ const Home: FC = props => {
         onChange={value => setIsPickerOpen(value)}
         overflowHeight={64}
         shadowTip={false}
+        swipeableViewsProps={{ slideClassName: 'swipeable-view' }}
       >
         <ListPicker
           value={listType}
@@ -55,6 +56,7 @@ const Home: FC = props => {
         open={isFormOpen}
         scrollTopAtClose={true}
         onChange={onFormVisibilityChange}
+        swipeableViewsProps={{ slideClassName: 'swipeable-view' }}
       >
         <CreateTaskForm ref={formRef} onSubmit={() => setIsFormOpen(false)} />
       </SwipeableBottomSheet>
@@ -72,13 +74,8 @@ export default styled(Home)`
     right: 20px;
   }
 
-  .react-swipeable-view-container > div:last-of-type {
-    display: none;
-  }
-
-  .react-swipeable-view-container,
-  .react-swipeable-view-container > div:first-of-type,
-  .react-swipeable-view-container > div:first-of-type > div {
+  .swipeable-view,
+  .swipeable-view > div {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: ${colors.background} !important;
