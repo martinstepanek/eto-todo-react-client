@@ -11,8 +11,8 @@ type Mutation {
   login(user: UserInput!): User!
   createTask(task: TaskInput!): TaskOperation!
   editTask(task: TaskInput!, taskId: String!): Task
-  markTaskAsDone(taskEntry: TaskEntryInput!): Task
-  markTaskAsNotDone(taskEntry: TaskEntryInput!): Task
+  markTaskAsDone(taskEntry: TaskEntryInput!): TaskOperation
+  markTaskAsNotDone(taskEntry: TaskEntryInput!): TaskOperation
   delayTask(taskEntryDelay: TaskEntryDelayInput!): Task
   deleteTask(taskEntryDelay: TaskEntryDeleteInput!): Task
 }
@@ -84,6 +84,8 @@ type TaskOperation {
 
 enum TaskOperationType {
   Create
+  MarkAsDone
+  MarkAsNotDone
   Update
   Delete
 }
